@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MoveSphere : MonoBehaviour {
+public class PlayerController : MonoBehaviour 
+{
+	public float _speedPlayer;
+	public float _slowSpeed;
+	public float _slowTime;
 
-	public float _speedSphere;
 
-	private GameController _gameController;
 	private Rigidbody _rb;
 
+
+	private GameController _gameController;
+	// Use this for initialization
 	void Start () 
 	{
 		_rb = GetComponent<Rigidbody> ();
-		_rb.velocity = transform.forward * _speedSphere;
+		_rb.velocity = transform.forward * _speedPlayer;
 
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("gameController");
 		if (gameControllerObject != null)
@@ -27,15 +32,30 @@ public class MoveSphere : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-	
+
+		if (_gameController._gameover) 
+		{
+			_rb.velocity = Vector3.zero;
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Obj") 
 		{
-			_gameController._numberOfSphere += 3;
+			_gameController._numberOfSphere -= 10;
 			Destroy (other.gameObject);
-		}
+			_rb.velocity = transform.forward * _slowSpeed;
+			StartCoroutine (SlowPlayer ());
+
+		} 
+
 	}
+
+	IEnumerator SlowPlayer()
+	{
+		yield return new WaitForSeconds (_slowTime);
+		_rb.velocity = transform.forward * _speedPlayer;
+	}
+
 }

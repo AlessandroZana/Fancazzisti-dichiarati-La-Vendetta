@@ -10,17 +10,16 @@ public class GameController : MonoBehaviour
 	public Text _sphereText;
 	public Text _gameOverText;
 	public Text _restartText;
+	public bool _gameover;
 
 
 	// Use this for initialization
-	private bool _gameover;
 
 	void Start () 
 	{
 		_gameOverText.text = "";
 		_restartText.text = "";
 		_gameover = false;
-		_numberOfSphere = 10;
 	}
 
 	void Update()
