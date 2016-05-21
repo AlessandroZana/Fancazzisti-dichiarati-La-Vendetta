@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
 	public Transform _spawnShoot;
 	public float _shootDelay;
 
+	public Transform _target;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -16,7 +18,7 @@ public class EnemyController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		transform.LookAt(_target);
 	}
 
 	IEnumerator Shoot()
