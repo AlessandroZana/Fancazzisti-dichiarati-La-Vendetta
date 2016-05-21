@@ -38,6 +38,7 @@ public class MoveSphere : MonoBehaviour {
 			_gameController._numberOfSphere += 3;
 			Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (other.gameObject);
+			Destroy (gameObject);
 		}
 	}
 }
