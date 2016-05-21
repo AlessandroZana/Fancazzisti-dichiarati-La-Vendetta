@@ -7,6 +7,7 @@ public class MoveSphere : MonoBehaviour {
 
 	private GameController _gameController;
 	private Rigidbody _rb;
+	public GameObject explosion;
 
 	void Start () 
 	{
@@ -35,6 +36,7 @@ public class MoveSphere : MonoBehaviour {
 		if (other.tag == "Obj") 
 		{
 			_gameController._numberOfSphere += 3;
+			Instantiate (explosion, transform.position, transform.rotation);
 			Destroy (other.gameObject);
 		}
 	}
