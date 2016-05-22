@@ -12,13 +12,13 @@ public class EnemyController : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		StartCoroutine (Shoot ());
+
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		transform.LookAt(_target);
+		
 	}
 
 	IEnumerator Shoot()
@@ -28,5 +28,15 @@ public class EnemyController : MonoBehaviour
 			Instantiate (_shot, _spawnShoot.position, _spawnShoot.rotation);
 			yield return new WaitForSeconds (_shootDelay);
 		}
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.tag == "Player") 
+		{
+			transform.LookAt(_target);
+			StartCoroutine (Shoot ());
+		}
+			
 	}
 }
