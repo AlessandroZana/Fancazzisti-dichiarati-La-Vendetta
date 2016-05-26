@@ -10,13 +10,19 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody _rb;
 
-
+	private ShieldController _shield;
 	private GameController _gameController;
 	// Use this for initialization
 	void Start () 
 	{
 		_rb = GetComponent<Rigidbody> ();
 		_rb.velocity = transform.forward * _speedPlayer;
+
+		GameObject ShieldObject = GameObject.FindGameObjectWithTag ("Shield");
+		if (ShieldObject != null)
+		{
+			_shield = ShieldObject.GetComponent <ShieldController>();
+		}
 
 		GameObject gameControllerObject = GameObject.FindGameObjectWithTag ("gameController");
 		if (gameControllerObject != null)
@@ -47,8 +53,16 @@ public class PlayerController : MonoBehaviour
 			Destroy (other.gameObject);
 			_rb.velocity = transform.forward * _slowSpeed;
 			StartCoroutine (SlowPlayer ());
+		}
 
-		} 
+		if (other.tag == "Enemy") 
+		{
+			_gameController._numberOfSphere -= 5;
+			if (_shield._canShoot == false) 
+			{
+				_shield._hp = 0;
+			}
+		}
 
 	}
 
