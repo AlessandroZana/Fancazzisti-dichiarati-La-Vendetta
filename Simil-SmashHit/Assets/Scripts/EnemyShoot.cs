@@ -7,14 +7,9 @@ public class EnemyShoot : MonoBehaviour
 
 	private Rigidbody _rb;
 	// Use this for initialization
-	void Awake () 
-	{
-		_rb = GetComponent<Rigidbody> ();
-		_rb.velocity = transform.forward * _speedShoot;
-	}
-	
+
 	// Update is called once per frame
-	void Update () 
+	void  FixedUpdate () 
 	{
 		_rb = GetComponent<Rigidbody> ();
 		_rb.velocity = transform.forward * _speedShoot;
